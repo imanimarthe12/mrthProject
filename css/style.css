@@ -1,0 +1,65 @@
+.contain{
+    margin: auto;
+    margin-top: 20px;
+    border: 1px solid cornflowerblue;
+    border-top: 20px solid cornflowerblue;
+    width: 29%;
+    height: 450px;
+    padding: 0px 20px 0px 20px;
+}
+
+.btn{
+    margin-top: 10px;
+}
+.contain h1{
+    text-align: center;
+}
+
+.sidenav{
+    height: 100%;
+    width: 160px;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #111;
+    overflow-x: hidden;
+    padding-top: 90px;
+}
+.top{
+    background-color: cornflowerblue;
+    margin-top: 10px;
+    padding-bottom: 10px;
+}
+
+.containee{
+    border: 1px solid cornflowerblue;
+    height: 520px;
+}
+.sidenav a{
+    padding: 6px 8px 6px 16px;
+    text-decoration: none;
+    font-size: 25px;
+    color: #818181;
+    display: block;
+}
+
+.sidenav a:hover{
+    color: #f1f1f1;
+}
+
+.main{
+    margin-left: 160px;
+    padding: 0px 10px;
+}
+
+.row{
+    padding-left: 20px;
+}
+
+.btn-danger{
+    margin-left: 480px;
+}
+.welcome{
+    margin-left: 155px;
+}
