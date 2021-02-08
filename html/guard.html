@@ -6,6 +6,11 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="../css/style.css">
     <title>Irondo App</title>
+    <script>
+        if (localStorage.getItem('token') === null) {
+            window.location.href = '../html/login.html';
+        }
+    </script>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-primary">
@@ -16,7 +21,7 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent" >
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a href="../index.html" class="nav-link" style="color: aliceblue;">Logout</a>
+                    <a href="./login.html" class="nav-link" style="color: aliceblue;" onclick="logoutButton()">Logout</a>
                 </li>
             </ul>
         </div>
@@ -34,17 +39,13 @@
                 <div class="col">
                     <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">Add Guard</button>
                 </div>
-                <div class="col">
-                    <button class="btn btn-danger" id="btn-danger">Delete</button>
-                </div>
             </div>
             
         </div>
-        <div class="containee">
-            <table class="table">
+        <div class="containee" id="tbl">
+            <table class="table" id="tabl">
                 <thead class="thead-dark">
                     <tr>
-                        <th scope="col">#</th>
                         <th scope="col">First Name</th>
                         <th scope="col">Last Name</th>
                         <th scope="col">NID</th>
@@ -52,31 +53,30 @@
                         <th scope="col">Check</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>John</td>
-                        <td>Doe</td>
-                        <td>1190990989888834</td>
-                        <td>0784218000</td>
-                        <td><input type="checkbox" class="form-control" name="" id="check"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>Jane</td>
-                        <td>Doe</td>
-                        <td>11909905559888834</td>
-                        <td>0783553535</td>
-                        <td><input type="checkbox" class="form-control" name="" id="check"></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>Rock</td>
-                        <td>Stri</td>
-                        <td>11943560989888834</td>
-                        <td>07867679939</td>
-                        <td><input type="checkbox" class="form-control" name="" id="check"></td>
-                    </tr>
+                <tbody id="tbody">
+                    <script>
+                        let tableData;
+                            fetch('http://irondo-app.herokuapp.com/api/guard')
+                            .then(res => res.json())
+                            .then(data => {
+                                console.log(data);
+                                const resultArrays = data.results;
+                                for(i in resultArrays){
+                                    tableData += `
+                                        <tr>
+                                            <td>${resultArrays[i].first_name}</td>
+                                            <td>${resultArrays[i].last_name}</td>
+                                            <td>${resultArrays[i].nid}</td>
+                                            <td>${resultArrays[i].telephone}</td>
+                                            <td><button class="btn btn-danger" onclick="deleteGuard()" id="deleteButton" data-delete='${resultArrays[i].nid}'>X</button></td>     
+                                        </tr>`
+                                }
+                                const table = document.getElementById('tbody');
+                                table.innerHTML = tableData;
+                            });
+                
+                            
+                    </script>
                 </tbody>
             </table>
         </div>
@@ -92,34 +92,22 @@
             </button>
           </div>
           <div class="modal-body">
-            <form action="" method="post">
                 <label>First Name</label>
-                <input type="text" class="form-control" required/>
+                <input type="text" class="form-control" id="firstName" required/>
                 <label>Last Name</label>
-                <input type="text" class="form-control" required/>
+                <input type="text" class="form-control" id="lastName" required/>
                 <label>NID</label>
-                <input type="text" class="form-control" required/>
+                <input type="text" class="form-control" id="nId" maxlength="16" minlength="16" required/>
                 <label>Tel</label>
-                <input type="text" class="form-control" required/>
-                <label>Team</label>
-                <select class="form-control">
-                    <option disabled selected>Select a team</option>
-                    <option>Team A</option>
-                    <option>Team B</option>
-                    <option>Team C</option>
-                    <option>Team D</option>
-                </select>
-            
+                <input type="text" class="form-control" id="tel" required/>
           </div>
           <div class="modal-footer">
            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-           <button type="submit" class="btn btn-primary">Save</button>
-        </form>
+           <button type="submit" class="btn btn-primary" onclick="addGuard()">Save</button>
          </div>
        </div>
      </div>
      </div>
-
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
