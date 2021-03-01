@@ -14,7 +14,7 @@
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-        <a href="#" class="navbar-brand welcome" style="color: aliceblue;"><b>Welcome Richard!</b></a>
+        <a href="#" class="navbar-brand welcome" style="color: aliceblue;"><b>Guards Actions</b></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -55,8 +55,8 @@
                 </thead>
                 <tbody id="tbody">
                     <script>
-                        let tableData;
-                            fetch('http://irondo-app.herokuapp.com/api/guard')
+                        let tableData = "";
+                            fetch('http://127.0.0.1:5000/api/guard')
                             .then(res => res.json())
                             .then(data => {
                                 console.log(data);

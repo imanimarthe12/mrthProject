@@ -13,8 +13,7 @@ function signIn(){
         password: signPass
     }
     console.log(JSON.stringify(data));
-
-    fetch('http://irondo-app.herokuapp.com/api/signin', {
+    fetch('http://127.0.0.1:5000/api/signin', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -64,7 +63,7 @@ function addUser(){
         userType: userType
     }
 
-    fetch('http://irondo-app.herokuapp.com/api/adduser', {
+    fetch('http://127.0.0.1:5000/api/adduser', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -74,6 +73,7 @@ function addUser(){
     .then(res => res.json())
     .then(data => {
         console.log('Success: ',data);
+        window.location.href='../html/admin.html'
     })
     .catch((error) => {
         console.error('Error: ', error);
@@ -94,7 +94,7 @@ function addGuard() {
         telephone: tel
     }
 
-    fetch('http://irondo-app.herokuapp.com/api/guard', {
+    fetch('http://127.0.0.1:5000/api/guard', {
         method: 'POST',
         headers: {
             'Content-type': 'application/json',
@@ -125,7 +125,7 @@ function showData() {
 function deleteGuard() {
     const button = document.getElementById('deleteButton');
     const dataDelete = button.getAttribute('data-delete');
-    fetch('http://irondo-app.herokuapp.com/api/guard?' + new URLSearchParams({nid: dataDelete}), {
+    fetch('http://127.0.0.1:5000/api/guard?' + new URLSearchParams({nid: dataDelete}), {
         method: 'DELETE',
     })
     .then(res => res.json())
@@ -152,7 +152,7 @@ function addWeekPlan(){
         teamLeader: teamLeader
     }
     console.log(data);
-    fetch('http://irondo-app.herokuapp.com/api/weekplan', {
+    fetch('http://127.0.0.1:5000/api/weekplan', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -178,7 +178,7 @@ function changePassword() {
     const changePasswordData = {
         password
     }
-    fetch('http://irondo-app.herokuapp.com/api/password?' + new URLSearchParams({nid: userId}), {
+    fetch('http://127.0.0.1:5000/api/password?' + new URLSearchParams({nid: userId}), {
         method: 'PATCH',
         headers: {
             'Content-type': 'application/json',
@@ -199,7 +199,7 @@ function deleteUser(){
     const button = document.getElementById('deleteButtonUser');
     const dataDelete = button.getAttribute('data-d');
     console.log(dataDelete)
-    fetch('http://irondo-app.herokuapp.com/api/user?' + new URLSearchParams({id: dataDelete}), {
+    fetch('http://127.0.0.1:5000/api/user?' + new URLSearchParams({id: dataDelete}), {
         method: 'DELETE',
     })
     .then(res => res.json())
@@ -225,7 +225,7 @@ function createReport(){
     }
 
     console.log(data);
-    fetch('http://irondo-app.herokuapp.com/api/report', {
+    fetch('http://127.0.0.1:5000/api/report', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
