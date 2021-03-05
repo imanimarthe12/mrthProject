@@ -10,11 +10,11 @@
             window.location.href = '../html/login.html';
         }
     </script>
-    <title>Document</title>
+    <title>Add Guard</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-        <a href="#" class="navbar-brand welcome" style="color: aliceblue;"><b>Change Password</b></a>
+        <a href="#" class="navbar-brand welcome" style="color: aliceblue;"><b>Add Guard</b></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -28,18 +28,28 @@
     </nav>
 
     <div class="sidenav">
-        <a href="#">Change Password</a>
+        <a href="./viewReportsCommander.html">Home<a>
+        <a href="./viewIncident.html">Incident</a>
+        <a href="./viewPatrol.html">Patrol</a>
+        <a href="./changePassword.html">Change Password</a>
     </div>
     
-    <div class="main">
+    <div class="main" style="width: 60%; margin: auto; margin-top: 100px;">
         <div class="top" style="height: 50px;"> 
-            <h4 style="color: aliceblue; text-align: center;">Change Password</h4>
+            <h4 style="color: aliceblue; text-align: center;">Add Guard</h4>
         </div>
 
-        <div style="width: 500px; margin: auto;">
-            <label>New Password</label>
-            <input type="password" name="newPassword" id="newPassword" class="form-control">
-            <button class="btn btn-primary" onclick="changePassword()">Change</button>
+        <div style="width: 500px; margin: auto; margin-top: 50px;">
+            <input type="text" id="guardName" placeholder="Enter guard names" class="form-control" required>
+            <input type="text" id="idCard" placeholder="Enter Id card number" maxlength="16" class="form-control" required>
+            <select id="team" class="form-control" required>
+                <option selected disabled>Choose the team</option>
+                <option value="A">Team A</option>
+                <option value="B">Team B</option>
+                <option value="C">Team C</option>
+                <option value="D">Team D</option>
+            </select>
+            <button class="btn btn-primary" onclick="actAddGuard()" style="width: 100%;">Add</button> 
         </div>
 
     </div>

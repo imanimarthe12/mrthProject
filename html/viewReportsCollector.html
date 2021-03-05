@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+        if (localStorage.getItem('token') === null) {
+            window.location.href = '../html/login.html';
+        }
+    </script>
+    <title>Home</title>
+</head>
+<body style="padding-bottom: 50px;">
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <a href="#" class="navbar-brand welcome" style="color: aliceblue;"><b>Reports</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a href="./login.html" class="nav-link" style="color: aliceblue;" onclick="logoutButton()">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="sidenav">
+        <a href="./viewReportsCollector.html">Home<a>
+        <a href="./viewCitizen.html">Citizens</a>
+        <a href="./viewPayment.html">Payments</a>
+        <a href="./changePassword.html">Change Password</a>
+    </div>
+    
+    <div class="main" style="width: 60%; margin: auto;">
+        <div style="display: flex; justify-content: space-between;">
+            <h3>Citizen List</h3><button class="btn btn-success" id="btnPrintCitizen">Print Citizen Report</button>
+        </div>
+        <div class="containee" id="citizenReport" style="width: 100%; margin: auto; min-height: 20px;" id="tbl">
+            <table class="table" id="tabl">
+                <thead class="thead-dark">
+                    <tr>
+                        <th id="pdf" scope="col">Citizen Id</th>
+                        <th id="pdf" scope="col">Citizen Name</th>
+                        <th id="pdf" scope="col">ID Card</th>
+                        <th id="pdf" scope="col">Telephone</th>
+                    </tr>
+                </thead>
+                <tbody id="citizenBody">
+                    <script>
+                        fetch('http://127.0.0.1:5000/api/citizen')
+                        .then((res) => res.json())
+                        .then((data) => {
+                            let tableData = "";
+                            data.results.forEach(obj => {
+                                return tableData = tableData + `<tr><td>${obj.citizenId}</td>
+                                                                    <td>${obj.citizenName}</td>
+                                                                    <td>${obj.idCard}</td>
+                                                                    <td>${obj.phoneNumber}</td>
+                                                                </tr>`   
+                            });
+                            const tableBody = document.getElementById('citizenBody');
+                            tableBody.innerHTML = tableData;
+                        })
+                    </script>
+                </tbody>
+            </table>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+            <h3>Incident Report</h3><button class="btn btn-success" id="btnIncidentPrint">Print Incident Report</button>
+        </div>
+        <div class="containee" id="incidentReport" style="width: 100%; margin: auto; min-height: 20px;" id="tbl">
+            <table class="table" id="tabl">
+                <thead class="thead-dark">
+                    <tr>
+                        <th id="pdf" scope="col">Incident Id</th>
+                        <th id="pdf" scope="col">Date</th>
+                        <th id="pdf" scope="col">Incident Description</th>
+                        <th id="pdf" scope="col">Way Forward</th>
+                    </tr>
+                </thead>
+                <tbody id="incidentBody">
+                    <script>
+                        fetch('http://127.0.0.1:5000/api/incident')
+                        .then((res) => res.json())
+                        .then((data) => {
+                            let tableData = "";
+                            data.results.forEach(obj => {
+                                return tableData = tableData + `<tr><td>${obj.incidentId}</td>
+                                                                    <td>${obj.date}</td>
+                                                                    <td>${obj.incidentDescription}</td>
+                                                                    <td>${obj.wayForward}</td>
+                                                                </tr>`   
+                            });
+                            const tableBody = document.getElementById('incidentBody');
+                            tableBody.innerHTML = tableData;
+                        })
+                    </script>
+                </tbody>
+            </table>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+            <h3>Payment Report</h3><button class="btn btn-success" id="btnPrintPayment">Print Payment Report</button>
+        </div>
+        <div class="containee" id="paymentReport" style="width: 100%; margin: auto; min-height: 20px;" id="tbl">
+            <table class="table" id="tabl">
+                <thead class="thead-dark">
+                    <tr>
+                        <th id="pdf" scope="col">Payment Id</th>
+                        <th id="pdf" scope="col">Issued Date</th>
+                        <th id="pdf" scope="col">Paid Amount</th>
+                        <th id="pdf" scope="col">Paid Month</th>
+                    </tr>
+                </thead>
+                <tbody id="paymentBody">
+                    <script>
+                        fetch('http://127.0.0.1:5000/api/payment')
+                        .then((res) => res.json())
+                        .then((data) => {
+                            let tableData = "";
+                            data.results.forEach(obj => {
+                                return tableData = tableData + `<tr><td>${obj.paymentId}</td>
+                                                                    <td>${obj.datePayment}</td>
+                                                                    <td>${obj.paidAmount}</td>
+                                                                    <td>${obj.paidMonth}</td>
+                                                                </tr>`   
+                            });
+                            const tableBody = document.getElementById('paymentBody');
+                            tableBody.innerHTML = tableData;
+                        })
+                    </script>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+      <script src="../js/app.js"></script>
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>

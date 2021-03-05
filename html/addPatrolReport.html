@@ -10,11 +10,11 @@
             window.location.href = '../html/login.html';
         }
     </script>
-    <title>Document</title>
+    <title>Add Daily Report</title>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-primary">
-        <a href="#" class="navbar-brand welcome" style="color: aliceblue;"><b>Change Password</b></a>
+        <a href="#" class="navbar-brand welcome" style="color: aliceblue;"><b>Add Daily Report</b></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -28,18 +28,39 @@
     </nav>
 
     <div class="sidenav">
-        <a href="#">Change Password</a>
+        <a href="./viewReportsCommander.html">Home<a>
+        <a href="./viewIncident.html">Incident</a>
+        <a href="./viewPatrol.html">Patrol</a>
+        <a href="./changePassword.html">Change Password</a>
     </div>
     
-    <div class="main">
+    <div class="main" style="width: 60%; margin: auto; margin-top: 100px;">
         <div class="top" style="height: 50px;"> 
-            <h4 style="color: aliceblue; text-align: center;">Change Password</h4>
+            <h4 style="color: aliceblue; text-align: center;">Add Daily Report</h4>
         </div>
 
-        <div style="width: 500px; margin: auto;">
-            <label>New Password</label>
-            <input type="password" name="newPassword" id="newPassword" class="form-control">
-            <button class="btn btn-primary" onclick="changePassword()">Change</button>
+        <div style="width: 500px; margin: auto; margin-top: 50px;">
+            <select id="day" class="form-control" required>
+                <option selected disabled>Choose the day</option>
+                <option value="monday">Monday</option>
+                <option value="tuesday">Tuesday</option>
+                <option value="wednesday">Wednesday</option>
+                <option value="thusday">Thusday</option>
+                <option value="friday">Friday</option>
+                <option value="saturday">Saturday</option>
+                <option value="sunday">Sunday</option>
+            </select>
+            <input type="number" id="week" placeholder="Enter week number of the month" maxlength="16" class="form-control" required>
+            <input type="text" id="month" placeholder="Enter the month" maxlength="16" class="form-control" required>
+            <input type="date" id="date" placeholder="Pick a date" maxlength="16" class="form-control" required>
+            <select id="team" class="form-control" required>
+                <option selected disabled>Choose the team</option>
+                <option value="A">Team A</option>
+                <option value="B">Team B</option>
+                <option value="C">Team C</option>
+                <option value="D">Team D</option>
+            </select>
+            <button class="btn btn-primary" onclick="actAddDailyReport()" style="width: 100%;">Add</button> 
         </div>
 
     </div>

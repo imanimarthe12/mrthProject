@@ -7,6 +7,10 @@
     height: 450px;
     padding: 0px 20px 0px 20px;
 }
+.form-control{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
 .btn{
     margin-top: 10px;
@@ -34,7 +38,6 @@
 
 .containee{
     border: 1px solid cornflowerblue;
-    height: 520px;
 }
 .sidenav a{
     padding: 6px 8px 6px 16px;

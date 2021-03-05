@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+        // if (localStorage.getItem('token') === null) {
+        //     window.location.href = '../html/login.html';
+        // }
+    </script>
+    <title>Add Staff</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-primary">
+        <a href="#" class="navbar-brand welcome" style="color: aliceblue;"><b>View Patrol</b></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent" >
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a href="./login.html" class="nav-link" style="color: aliceblue;" onclick="logoutButton()">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="sidenav">
+        <a href="./viewReportsCommander.html">Home<a>
+        <a href="./viewIncident.html">Incident</a>
+        <a href="./viewPatrol.html">Patrol</a>
+        <a href="./changePassword.html">Change Password</a>
+    </div>
+    
+    <div class="main">
+        <div class="top">
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-success" onclick="addGuard()">Add Guard</button>
+                </div>
+            </div>
+            
+        </div>
+        <div class="containee" id="tbl">
+            <table class="table" id="tabl">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Guard Id</th>
+                        <th scope="col">Guard Name</th>
+                        <th scope="col">Id Card</th>
+                        <th scope="col">Team</th>
+                    </tr>
+                </thead>
+                <tbody id="guardBody">
+                    <script>
+                        fetch('http://127.0.0.1:5000/api/guard')
+                        .then((res) => res.json())
+                        .then((data) => {
+                            let tableData = "";
+                            data.results.forEach(obj => {
+                                return tableData = tableData + `<tr><td>${obj.guard_id}</td>
+                                                                    <td>${obj.guardName}</td>
+                                                                    <td>${obj.idCard}</td>
+                                                                    <td>${obj.team}</td>
+                                                                </tr>`   
+                            });
+                            const tableBody = document.getElementById('guardBody');
+                            tableBody.innerHTML = tableData;
+                        })
+                    </script>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="top">
+            <div class="row">
+                <div class="col">
+                    <button class="btn btn-success" onclick="addDaily()">Add Daily Partol</button>
+                </div>
+            </div>
+            
+        </div>
+        <div class="containee" id="tbl">
+            <table class="table" id="tabl">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Id</th>
+                        <th scope="col">Day</th>
+                        <th scope="col">Week</th>
+                        <th scope="col">Month</th>
+                        <th scope="col">Date</th>
+                        <th scope="col">Team</th>
+                    </tr>
+                </thead>
+                <tbody id="dailyBody">
+                    <script>
+                        fetch('http://127.0.0.1:5000/api/daily')
+                        .then((res) => res.json())
+                        .then((data) => {
+                            let tableData = "";
+                            data.results.forEach(obj => {
+                                return tableData = tableData + `<tr><td>${obj.dailyId}</td>
+                                                                    <td>${obj.day}</td>
+                                                                    <td>${obj.week}</td>
+                                                                    <td>${obj.month}</td>
+                                                                    <td>${obj.date}</td>
+                                                                    <td>${obj.team}</td>
+                                                                </tr>`   
+                            });
+                            const tableBody = document.getElementById('dailyBody');
+                            tableBody.innerHTML = tableData;
+                        })
+                    </script>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+      <script src="../js/app.js"></script>
+      <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+</body>
+</html>
